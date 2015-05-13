@@ -1,0 +1,17 @@
+1) Color Swatches:-
+
+	http://www.magentocommerce.com/wiki/4_-_themes_and_template_customization/catalog/adding_colour_swatches_to_configurable_products
+	http://www.magentocommerce.com/boards/viewthread/25767/
+
+
+
+2) import product  images:
+	
+	http://www.magentocommerce.com/boards/viewthread/41000/
+
+
+
+
+
+
+http://www.tlswebsolutions.com/magento-fontis-fckeditor-wysiwyg-transactional-email/

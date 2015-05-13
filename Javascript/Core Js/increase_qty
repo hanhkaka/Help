@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title> </title>
+		<style type="text/css">
+		
+		</style>
+		<script type="text/javascript">
+		function subtractQty(){
+			if(document.getElementById("qty").value - 1 < 0)
+				return;
+			else
+				 document.getElementById("qty").value--;
+		}
+		</script>
+	</head>
+	<body>
+		<form name="f1">
+			<input type='text' name='qty' id='qty' />
+			<input type='button' name='add' onclick='javascript: document.getElementById("qty").value++;' value='+'/>
+			<input type='button' name='subtract' onclick='javascript: subtractQty();' value='-'/>
+		</form>
+	</body>
+</html>

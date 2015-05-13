@@ -1,0 +1,4 @@
+
+*) DOB
+
+$this->output( $this->Form->input($field, array('type' => 'date', 'minYear' => '1970', 'maxYear' => date('Y'), 'dateFormat' => 'DMY', 'id'=>'date','label'=>false)));

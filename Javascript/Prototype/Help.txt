@@ -1,0 +1,32 @@
+
+
+*) Load Event :
+
+
+Event.observe(window, 'load', function() {
+	
+
+Event.observe('imagePointer', 'click', function(event) {
+	
+		alert('test');
+	
+    });
+
+
+
+});
+
+
+
+*) Add event in class name :
+
+
+
+Event.observe(window, 'load', function() {
+
+$$('.btn').each(function(element) {
+    element.observe('click', respond);
+})
+
+});
+

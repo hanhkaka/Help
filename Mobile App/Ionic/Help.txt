@@ -1,0 +1,3 @@
+User Href in Ionic:
+
+a)	ui-sref='url' || ui-sref='app.login'

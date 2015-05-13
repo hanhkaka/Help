@@ -1,0 +1,276 @@
+
+
+*)How to Add Dynamic Content to Magento Static Blocks and&nbsp;Pages:-
+
+	{{block type='core/template' name='contactForm' template='newsletter/subscribe.phtml'}}
+	
+	See more: http://www.chilipepperdesign.com/2009/03/03/how-to-add-dynamic-content-to-magento-static-blocks-and-pages
+
+	{{block type="core/template" template="testimonial/testimonials_client_says.phtml" number="2" title="Others Say:" identifier="testimonial-"}}
+
+
+*) Show Products on Home Page:-
+
+	{{block type="catalog/product_list" name="product_list" template="catalog/product/list.phtml"}} 
+
+	http://www.magentocommerce.com/wiki/groups/248/display_products_on_home_page
+
+*)Call Static Block on File:-
+
+	<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('elisou')->toHtml() ?> 
+
+
+
+*)Add Static Block in Static Page:-
+
+	{{block type=”cms/block” block_id=”home-page-promo”}}
+	
+	See more: http://prattski.com/2008/09/30/magento-add-static-block-to-cms-page/
+	
+	
+	
+	with XML:-
+	
+	
+	 <block type="cms/block" name="home-page-promo">
+                <!--
+                    The content of this block is taken from the database by its block_id.
+                    You can manage it in admin CMS -> Static Blocks
+                -->
+                <action method="setBlockId"><block_id>home-page-promo</block_id></action>
+            </block>
+	
+
+
+
+*)Add Home Link to Top Links:-
+
+	customer.xml--->
+
+	 <default>
+	 <!-- Mage_Customer -->
+	<reference name="top.links">
+	<action method="addLink" translate="label title" module="customer"><label>Home</label><url></url>
+	<title>Home</title><prepare>true</prepare>
+	<urlParams/><position>5</position></action>
+	<action method="addLink" translate="label title" module="customer">
+	<label>My Account</label><url helper="customer/getAccountUrl"/>
+	<title>My Account</title><prepare/><urlParams/><position>94</position></action>
+	</reference>
+	</default>
+
+	See more: 
+	http://www.magentocommerce.com/wiki/4_-_themes_and_template_customization/navigation/add_home_link_to_menu_bar
+	
+	
+*)GET THE QUERY STRING VALUE:-
+
+	$this->getRequest()->getParam('id')	
+
+
+*)Magento URL Path:-
+
+	
+*) Read data from Table:-
+
+    $query = "...SQL QUERY...";
+    $databaseConnection = Mage::getSingleton('core/resource')->getConnection('core_read');
+    $result = $databaseConnection->fetchAll($query);
+
+
+*) Query Function:-
+	
+	$write = Mage::getSingleton('core/resource')->getConnection('core_read');
+	$write->query($sql);
+
+
+*) Get The Product Custome Option :-
+
+
+
+	<?php
+			
+	$cObj = Mage::getModel(‘catalog/category’)->load($categoryId);
+	$productObj = $cObj->getProductCollection()->getData();
+	$product = Mage::getModel("catalog/product")->load( $_product->getId());
+	$i = 1;
+
+	echo "<pre>";
+
+	foreach ($product->getOptions() as $o) {
+
+		echo "<strong>Custom Option:" . $i . "</strong><br/>";
+		echo "Custom Option TYPE: " . $o->getType() . "<br/>";
+		echo "Custom Option TITLE: " . $o->getTitle() . "<br/>";
+		echo "Custom Option Values: <br/>";
+
+		// Getting Values if it has option values, case of select,dropdown,radio,multiselect
+
+		$values = $o->getValues();
+		foreach ($values as $v) {
+
+				print_r($v->getData());
+		}
+
+		$i++;
+
+		echo "----------------------------------<br/>";
+	}
+
+        ?>
+
+	http://subesh.com.np/2009/12/custom-options-product-magento/
+
+
+
+*) Get Price Format :-
+
+	http://www.magentocommerce.com/boards/viewthread/41165/
+
+
+*) Get the Data of Custom  Product Attribute
+
+	First Way:$product->getData("attribute_code");
+
+	Second Way:  $_helper = $this->helper('catalog/output');
+	<?php if ($_product->getDeliveryInfo()):?>
+	<?php echo $_helper->productAttribute($_product, nl2br($_product->getDeliveryInfo()), 'delivery_info') ?>
+	<?php endif;?>
+
+
+
+*) Module Creator :
+	
+	http://www.magentocommerce.com/magento-connect/danieln/extension/1108/modulecreator
+
+*) Get Product By Category:-
+
+	$cObj = Mage::getModel(‘catalog/category’)->load($categoryId);
+	$productObj = $cObj->getProductCollection()->getData();
+
+
+
+*)  Add to Cart button url :
+
+	http://www.magentocommerce.com/boards/viewthread/60152/
+	<?php echo $this->helper('checkout/cart')->getAddUrl($_product) ?> 
+
+*) Add price :
+
+	<?php echo $this->getPriceHtml($_product, true) ?>
+	
+*) Cart Item Total:-
+
+<?php $cart = Mage::helper('checkout/cart')->getSummaryCount(); ?>	
+
+*) Show subcategory :-
+
+	http://stackoverflow.com/questions/1820012/magento-display-sub-category-list
+
+*) breadcrumb for the contacts page.
+
+	http://www.magentocommerce.com/boards/viewthread/21047/
+
+*) Get Current Category Name:
+
+	Mage::registry('current_category')->getName();
+
+*) How to show Related products on product details page in Magento:
+	
+	http://www.n2ndevelopers.com/magento/how-to-show-related-products-on-product-details-page-in-magento/
+	
+	Open catalog.xml And Paste it under  Product view Section under 
+	<reference name=”content”>
+	
+	<block type=”catalog/product_list_related” name=”catalog.product.related” before=”-” template=”catalog/product/list/related.phtml”/>
+
+	<?php echo $this->getChildHtml('related'); ?>
+
+
+*)  Image Gallery in Product page
+
+	<?php $_images = new Mage_Catalog_Block_Product_View_Media; ?>
+            <?php if (count($_images->getGalleryImages()) > 0): ?>
+            <div class="more-views">
+                <h2><?php echo $_images->__('More Views') ?></h2>
+                <ul>
+                <?php foreach ($_images->getGalleryImages() as $_image): ?>
+                    <li>
+                        <a href="#" onclick="popWin('<?php echo $_images->getGalleryUrl($_image) ?>', 'gallery', 'width=300,height=300,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes'); return false;" title="<?php echo $_images->htmlEscape($_image->getLabel()) ?>"><img src="<?php echo $_images->helper('catalog/image')->init($_images->getProduct(), 'thumbnail', $_image->getFile())->resize(56); ?>" width="56" height="56" alt="<?php echo $_images->htmlEscape($_image->getLabel()) ?>" /></a>
+                    </li>
+                <?php endforeach; ?>
+                </ul>
+            </div>
+            <?php endif; ?> 
+ 
+*) add static block by layout:-
+
+	<block type="cms/block" name="left.cms.site_info">
+		<action method="setBlockId"><block_id>site_info</block_id></action>
+	</block>
+
+	http://www.anunaydahal.com/magento/create-static-block-magento/
+
+
+*) Get the Total Price of items currently in the Cart
+
+	<?php echo $this->helper('checkout')->formatPrice(Mage::getSingleton('checkout/cart')->getQuote()->getGrandTotal()); ?>
+
+	http://shamimcse05.wordpress.com/2010/12/23/how-to-get-total-cart-item-and-total-price-in-magento/
+
+
+*) Add review In Product Detail Page.
+
+	http://www.magentocommerce.com/boards/viewthread/8583/
+
+*) Add currency Selecter
+	http://inchoo.net/ecommerce/magento/how-to-add-currency-selector-to-magentos-header/
+
+
+*) Base Url:-
+
+	<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_LINK); ?>
+
+*) Get Skin Url :-
+
+	<?php echo $this->getSkinUrl(); ?>
+
+
+*) Fillter Records from the Collection:-
+
+	Mage::getModel('designs/designs')->getCollection()->addFilter('field_name','value'); 
+
+
+*) GET All Products :-
+
+	$_productCollection=Mage::getResourceModel('catalog/product_collection')->addAttributeToSelect('*')->setPageSize(6);
+	$_productCollection->load();
+	
+	setPageSize(6) for suing product limit
+	
+*) Get ADMIN's USER SESSION :-
+
+	$userInfo=Mage::getSingleton('admin/session')->getUser()->getData(); 	
+	
+*) Get  USER's SESSION :-	
+
+	Mage::getSingleton('customer/session')->isLoggedIn();
+	
+	
+*) For product model 
+
+$_productCollection=Mage::getResourceModel('catalog/product_collection')->addAttributeToSelect('*')->addAttributeToFilter('status',1)->setOrder('entity_id', 'DESC');  
+$_productCollection->getSelect()->limit(5,5);
+
+
+*) Fillter Product by Category :
+
+http://blog.chapagain.com.np/magento-how-to-filter-product-collection-using-2-or-more-category-filters/
+
+
+http://www.magentocommerce.com/boards/viewthread/21794/#t269835
+
+*) Check CMS Page:-
+
+Mage::getSingleton('cms/page')->getIdentifier()
+

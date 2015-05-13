@@ -1,0 +1,11 @@
+
+
+
+Attribute Value Sotred:-
+
+Tables:-
+
+eav_attribute_option_value 
+
+
+

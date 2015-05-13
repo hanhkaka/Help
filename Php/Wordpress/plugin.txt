@@ -1,0 +1,12 @@
+Slide Show
+--------------------------------------------------------------------------------------------------------------
+
+Meteor Slides
+
+http://wordpress.org/extend/plugins/meteor-slides/
+http://www.jleuze.com/plugins/meteor-slides/multiple-slideshows/
+http://wordpress.org/support/topic/plugin-meteor-slides-headers-with-different-slide-shows-per-page
+
+
+
+--------------------------------------------------------------------------------------------------------------

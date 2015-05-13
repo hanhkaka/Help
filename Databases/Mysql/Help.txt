@@ -1,0 +1,24 @@
+
+Command  Line:
+
+Exporting the Table
+To export the table run the following command from the command line:
+“mysqldump -p - -user=username dbname tableName > tableName.sql”
+
+This will export the tableName to the file tableName.sql.
+[NOTE: there should be no space between the two dashes, but I have to write it that way so that it display properly].
+
+Importing the Table
+To import the table run the following command from the command line:
+mysql -u username -p -D dbname < tableName.sql
+
+
+/*****************Count Tables *************/
+
+SHOW TABLES; SELECT FOUND_ROWS();
+
+SHOW DATABASES;
+
+/*****************Show Version *************/
+
+mysql> SHOW VARIABLES LIKE 'version';

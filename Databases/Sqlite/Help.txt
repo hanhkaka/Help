@@ -1,0 +1,3 @@
+Cheak the EXISTS record:-
+
+SELECT EXISTS(SELECT 1 FROM albums WHERE albumName="eg_family_and_vacation" );

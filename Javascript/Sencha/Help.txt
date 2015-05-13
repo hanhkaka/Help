@@ -1,0 +1,9 @@
+/****************** Web Start *************/
+
+sencha fs web -p 80 start -map app_folder_path
+
+/************* Make App ***************/
+
+sencha -sdk /path/to/SDK generate app MyApp /path/to/MyApp
+
+http://www.sencha.com/products/extjs/up-and-running/cmd-getting-started

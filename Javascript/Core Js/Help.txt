@@ -1,0 +1,51 @@
+ 
+/*************************** replace special char with _ sign  ****************************/
+ 
+ nameDir = nameDir.replace(/[^a-zA-Z0-9]/g,'_').toLowerCase();
+ 
+ /*************************** create Element ****************************/
+ 
+ function addElement() {
+
+  var ni = document.getElementById('myDiv');
+
+  var numi = document.getElementById('theValue');
+
+  var num = (document.getElementById('theValue').value -1)+ 2;
+
+  numi.value = num;
+
+  var newdiv = document.createElement('div');
+
+  var divIdName = 'my'+num+'Div';
+
+  newdiv.setAttribute('id',divIdName);
+
+  newdiv.innerHTML = 'Element Number '+num+' has been added! <a href=\'#\' onclick=\'removeElement('+divIdName+')\'>Remove the div "'+divIdName+'"</a>';
+
+  ni.appendChild(newdiv);
+
+}
+
+
+
+function removeElement(divNum) {
+
+  var d = document.getElementById('myDiv');
+
+  var olddiv = document.getElementById(divNum);
+
+  d.removeChild(olddiv);
+
+}
+
+ /*************************** Email validate ****************************/
+function validate(form_id,email) {
+   var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+   var address = document.forms[form_id].elements[email].value;
+   if(reg.test(address) == false) {
+      alert('Invalid Email Address');
+      return false;
+   }
+}
+

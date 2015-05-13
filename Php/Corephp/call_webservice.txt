@@ -1,0 +1,43 @@
+<?php
+      
+	$client = new SoapClient("https://webservices.24sevenoffice.com/Timesheet/TimeService.asmx?wsdl");
+	var_dump($client->__getFunctions());
+	/*$sh_param = array('websiteConfigID'    =>    '5577'); 
+		$res = $client->GetCategories($sh_param);
+	*/
+///print_r($res); 
+?>
+
+
+
+
+<?php
+$uname = $_POST['username'];
+$upswd = $_POST['password'];
+$url = "http://www.mywebsite.com/joomla_site/index.php";
+
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $url );
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE );
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE );
+curl_setopt($ch, CURLOPT_COOKIEJAR, './cookie.txt');
+curl_setopt($ch, CURLOPT_COOKIEFILE, './cookie.txt');
+curl_setopt($ch, CURLOPT_HEADER, FALSE );
+$ret = curl_exec($ch);
+if (!preg_match('/name="([a-zA-z0-9]{32})"/', $ret, $spoof)) {
+    preg_match("/name='([a-zA-z0-9]{32})'/", $ret, $spoof);
+}
+
+// POST fields
+$postfields = array();
+$postfields['username'] = urlencode($uname);
+$postfields['passwd'] = urlencode($upswd);
+$postfields['lang'] = '';
+$postfields['option'] = 'com_login';
+$postfields['task'] = 'login';
+$postfields[$spoof[1]] = '1';
+curl_setopt($ch, CURLOPT_POST, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $postfields);
+$ret = curl_exec($ch);
+?>
+

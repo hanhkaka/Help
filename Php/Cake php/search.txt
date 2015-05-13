@@ -1,0 +1,40 @@
+ <?php 
+ $criteria = ' 1=1 '; 
+	    $keyword = @$this->passedArgs['Search.keywords'];
+        $subject = $this->passedArgs['Course.subject'];
+        $grade =   $this->passedArgs['Course.grade'];      
+			
+		  
+			 if($subject  != 'Select a Subject'){
+			   $criteria .= ' && Course.course_name = "'.$subject.'" ';
+			 }
+			 
+			
+			 if($grade  != 'Select a Grade Level'){
+			   $criteria .= ' && Course.grade_level = "'.$grade.'"';
+			 }
+			
+			 
+			 if($keyword  != ''){
+			   $criteria .= ' && (Course.course_name like "%'.$keyword.'%" || Course.grade_level like "%'.$keyword.'%" || Course.duration like "%'.$keyword.'%" || Course.description like "%'.$keyword.'%" || Course.tags like "%'.$keyword.'%")';
+			 }
+			 $criteria .= ' && library = 1';    
+			
+			   
+          
+		
+			//$this->Session->write('keyword', 'Search.keywords:'.$keyword);
+			
+			$this->paginate['conditions'][] = array($criteria);
+		     
+		    		
+			
+			$this->data['Search']['keywords'] = $keyword;
+			$title[] = __('Keywords',true).': '.$keyword;
+		
+		// get posts		
+		//$this->Post->contain($contain); // required if you are using Containable
+		//$this->paginate['reset']=false; // required if you are using Containable
+		$this->paginate['limit'] = 10;
+		$courses = $this->paginate('Course');
+?>

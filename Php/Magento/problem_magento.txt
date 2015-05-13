@@ -1,0 +1,31 @@
+1) Show Attribute in Product list page
+
+
+http://www.magentocommerce.com/boards/viewthread/19215/
+
+--------------------------------------------------------------------------------
+
+2) Admin Does Not Login in Chrome
+
+http://stackoverflow.com/questions/12328366/why-i-can-not-login-to-magento-backend-using-google-chrome
+
+Go to app/code/core/Mage/Core/Model/Session/Abstract/Varien.php file within your magento directory.
+Find the code:
+
+session_set_cookie_params(
+$this->getCookie()->getLifetime(),
+$this->getCookie()->getPath(),
+$this->getCookie()->getDomain(),
+$this->getCookie()->isSecure(),
+$this->getCookie()->getHttponly()
+);
+and replace with
+
+session_set_cookie_params(
+$this->getCookie()->getLifetime(),
+$this->getCookie()->getPath()
+//$this->getCookie()->getDomain(),
+//$this->getCookie()->isSecure(),
+//$this->getCookie()->getHttponly()
+);
+After this save the file.

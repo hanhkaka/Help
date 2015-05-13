@@ -1,0 +1,2 @@
+store,websites,attribute_set,type,category_ids,sku,name,manufacturer,thumbnail,small_image,image,weight,price,description,status,tax_class_id,qty,short_description,visibility,vendor_code
+admin,base,Chemicals,simple,8,test,Demo 1 ASDAD,test,/varinder/demo.jpeg,/varinder/demo.jpeg,/varinder/demo.jpeg,2,10,test,Enabled,Taxable Goods,0,test,"Catalog, Search",Ralph

@@ -1,0 +1,50 @@
+
+
+Import Products categories, multiple images and custom options:---
+
+http://www.magentocommerce.com/magento-connect/capacitywebsolutions/extension/4421/import_products_categories__multiple_images_and_custom_options
+
+
+Beetailer. Facebook integration:-
+http://www.magentocommerce.com/magento-connect/beetailer/extension/3659/beecoder_beeshopy
+
+
+MageConnector:-
+http://www.magentocommerce.com/extension/specs/2309/mageconnector#specs
+
+
+
+
+Facebook and Twitter widget. Comment and share your products:-
+http://www.magentocommerce.com/magento-connect/beetailer/extension/5473/beeshopy_beesocial
+
+
+
+Payment Modules:-
+
+Sage Pay : http://www.magentocommerce.com/magento-connect/ebizmarts/extension/163/protx-direct-payment-module
+
+
+
+
+Module Creator Bug on Magento =>1.5.0  
+
+http://www.magentocommerce.com/boards/viewthread/54435/
+
+
+
+
+New And Testimonials:-
+
+http://www.magentocommerce.com/magento-connect/Mason+Web+Development/extension/3708/mwd_news_and_testimonials_with_images_extension
+http://www.magentocommerce.com/magento-connect/MageZone/extension/7885/magezone_testimonial
+
+
+
+Feature Products:
+http://www.magentocommerce.com/magento-connect/Inchoo/extension/2513/featured-products
+
+
+
+
+

@@ -1,0 +1,25 @@
+
+
+*************** Get Feature Image *************************
+
+ http://codex.wordpress.org/Function_Reference/get_the_post_thumbnail
+
+
+	 $feat_image = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );
+	echo '$feat_image';
+
+
+   $large_image_url = wp_get_attachment_image_src( get_post_thumbnail_id(145), 'large');
+   echo '<a href="' . $large_image_url[0] . '" title="' . the_title_attribute('echo=0') . '" >';
+   echo get_the_post_thumbnail($post->ID, 'thumbnail'); 
+   echo '</a>';
+ 
+
+
+*************** Base URL ****************************************
+
+bloginfo('url');
+bloginfo('template_url')
+
+
+admin: $P$BV0XfLBjzr8mN7cJK.cVaIbWAya0oW1

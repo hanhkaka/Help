@@ -1,0 +1,35 @@
+/********** Add New field and Update data in Mongodb ***********/
+
+	db.users.update({},
+				  {$set : {"new_field":1}},
+				  {upsert:false,
+				  multi:true}) 
+
+
+
+/************************ Export Collection *******************/
+
+	mongoexport --collection collection --out collection.json
+
+
+
+
+/************************ Import Collection *******************/
+
+	mongoimport --collection collection --file collection.json	  
+
+
+
+						  
+/************************ Import Database ********************/
+
+	mongorestore --host locahost --db dbname folder_path
+
+
+						  
+/************************ Export Database ********************/
+
+	mongodump --host locahost --db dbname folder_path	
+
+
+					  

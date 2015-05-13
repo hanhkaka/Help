@@ -1,0 +1,12 @@
+*) Add Script in joomla
+
+JHTML::script('jquery.ui.autocomplete.html.js', 'components/com_virtuemart/assets/js/');
+
+
+*) Check front Page in joomla(2.5)
+
+$app = JFactory::getApplication();
+$menu = $app->getMenu();
+if ($menu->getActive() == $menu->getDefault()) {
+
+}

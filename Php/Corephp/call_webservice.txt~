@@ -1,0 +1,10 @@
+<?php
+      
+	$client = new SoapClient("https://webservices.24sevenoffice.com/Timesheet/TimeService.asmx?wsdl");
+	var_dump($client->__getFunctions());
+	/*$sh_param = array('websiteConfigID'    =>    '5577'); 
+		$res = $client->GetCategories($sh_param);
+	*/
+///print_r($res); 
+?>
+

@@ -1,0 +1,73 @@
+*************************** ADB Commands ***********************
+
+1) Changing default port (i.e. 5037) on which adb server runs
+-->
+	a) Use the environment variable ANDROID_ADB_SERVER_PORT to select the port.
+
+			The following works under bash:
+			$ export ANDROID_ADB_SERVER_PORT=12345 
+			$ adb start-server
+			* daemon not running. starting it now on port 12345 *
+			* daemon started successfully *
+			$ adb devices
+			List of devices attached 
+			TA2070M5O6  device
+			$ ANDROID_ADB_SERVER_PORT=6789 adb devices
+			* daemon not running. starting it now on port 6789 *
+			* daemon started successfully *
+		List of devices attached 
+
+	b) Use option -P (Note: Caps P)to start adb server in a specific port.
+
+	$adb -P 5038 start-server
+	
+	2)  adb connect
+	adb connect <device-ip-address>
+	
+	3) adb devices
+		
+	4) adb push
+		adb push sample.txt /sdcard/mydir/
+		
+	5) adb pull 
+		adb pull [device_dir_path] [pc_dir_path]
+		
+		Pull Local Database ;
+		adb pull data/data/com.rpm.rpm/app_database/file__0/0000000000000001.db d:\
+		
+		Pull .APK File ;
+		adb pull data/app/com.rpm.rpm.apk d:\
+
+	6) adb install
+		adb install ABT.apk
+
+	7) adb uninstall
+		adb uninstall com.aakash.lab
+
+	8) adb kill-server
+		adb kill-server
+		
+	9) Update ADB:
+		http://appinventor.mit.edu/explore/step-4a-21-installing-updated-adb-software.html
+		
+	
+
+*************************** Android  Commands ***********************
+	
+		a) Location Of .apk File:
+
+				--> your_project/bin/your_ap.apk
+
+				http://www.raweng.com/blog/2012/07/26/building-android-applications-apk-from-the-command-line/
+
+
+
+		b) Command For android app:
+
+			--> emulator -avd avd_name 		
+		
+		
+	
+	
+
+

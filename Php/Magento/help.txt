@@ -1,0 +1,605 @@
+﻿
+
+*)How to Add Dynamic Content to Magento Static Blocks and&nbsp;Pages:-
+
+	{{block type='core/template' name='contactForm' template='newsletter/subscribe.phtml'}}
+	
+	See more: http://www.chilipepperdesign.com/2009/03/03/how-to-add-dynamic-content-to-magento-static-blocks-and-pages
+
+	{{block type="core/template" template="testimonial/testimonials_client_says.phtml" number="2" title="Others Say:" identifier="testimonial-"}}
+
+
+*) Show Products on Home Page:-
+
+	{{block type="catalog/product_list" name="product_list" template="catalog/product/list.phtml"}} 
+
+	http://www.magentocommerce.com/wiki/groups/248/display_products_on_home_page
+
+*)Call Static Block on File:-
+
+	<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('elisou')->toHtml() ?> 
+
+
+
+*)Add Static Block in Static Page:-
+
+	{{block type=”cms/block” block_id=”home-page-promo”}}
+	
+	See more: http://prattski.com/2008/09/30/magento-add-static-block-to-cms-page/
+	
+	
+	
+	with XML:-
+	
+	
+	 <block type="cms/block" name="home-page-promo">
+                <!--
+                    The content of this block is taken from the database by its block_id.
+                    You can manage it in admin CMS -> Static Blocks
+                -->
+                <action method="setBlockId"><block_id>home-page-promo</block_id></action>
+            </block>
+	
+
+
+
+*)Add Home Link to Top Links:-
+
+	customer.xml--->
+
+	 <default>
+	 <!-- Mage_Customer -->
+	<reference name="top.links">
+	<action method="addLink" translate="label title" module="customer"><label>Home</label><url></url>
+	<title>Home</title><prepare>true</prepare>
+	<urlParams/><position>5</position></action>
+	<action method="addLink" translate="label title" module="customer">
+	<label>My Account</label><url helper="customer/getAccountUrl"/>
+	<title>My Account</title><prepare/><urlParams/><position>94</position></action>
+	</reference>
+	</default>
+
+	See more: 
+	http://www.magentocommerce.com/wiki/4_-_themes_and_template_customization/navigation/add_home_link_to_menu_bar
+	
+	
+*)GET THE QUERY STRING VALUE:-
+
+	$this->getRequest()->getParam('id')	
+
+
+*)Magento URL Path:-
+
+	
+*) Read data from Table:-
+
+    $query = "...SQL QUERY...";
+    $databaseConnection = Mage::getSingleton('core/resource')->getConnection('core_read');
+    $result = $databaseConnection->fetchAll($query);
+
+
+*) Query Function:-
+	
+	$write = Mage::getSingleton('core/resource')->getConnection('core_read');
+	$write->query($sql);
+
+
+*) Get The Product Custome Option :-
+
+
+
+	<?php
+			
+	$cObj = Mage::getModel(‘catalog/category’)->load($categoryId);
+	$productObj = $cObj->getProductCollection()->getData();
+	$product = Mage::getModel("catalog/product")->load( $_product->getId());
+	$i = 1;
+
+	echo "<pre>";
+
+	foreach ($product->getOptions() as $o) {
+
+		echo "<strong>Custom Option:" . $i . "</strong><br/>";
+		echo "Custom Option TYPE: " . $o->getType() . "<br/>";
+		echo "Custom Option TITLE: " . $o->getTitle() . "<br/>";
+		echo "Custom Option Values: <br/>";
+
+		// Getting Values if it has option values, case of select,dropdown,radio,multiselect
+
+		$values = $o->getValues();
+		foreach ($values as $v) {
+
+				print_r($v->getData());
+		}
+
+		$i++;
+
+		echo "----------------------------------<br/>";
+	}
+
+        ?>
+
+	http://subesh.com.np/2009/12/custom-options-product-magento/
+
+
+
+*) Get Price Format :-
+
+	http://www.magentocommerce.com/boards/viewthread/41165/
+
+
+*) Get the Data of Custom  Product Attribute
+
+	First Way:$product->getData("attribute_code");
+
+	Second Way:  $_helper = $this->helper('catalog/output');
+	<?php if ($_product->getDeliveryInfo()):?>
+	<?php echo $_helper->productAttribute($_product, nl2br($_product->getDeliveryInfo()), 'delivery_info') ?>
+	<?php endif;?>
+
+<?php echo $_product->getResource()->getAttribute('tshirts_content')->getFrontend()->getValue($_product); ?> 
+
+*) Module Creator :
+	
+	http://www.magentocommerce.com/magento-connect/danieln/extension/1108/modulecreator
+
+*) Get Product By Category:-
+
+	$cObj = Mage::getModel(‘catalog/category’)->load($categoryId);
+	$productObj = $cObj->getProductCollection()->getData();
+
+
+
+*)  Add to Cart button url :
+
+	http://www.magentocommerce.com/boards/viewthread/60152/
+	<?php echo $this->helper('checkout/cart')->getAddUrl($_product) ?> 
+
+*) Add price :
+
+	<?php echo $this->getPriceHtml($_product, true) ?>
+	
+*) Cart Item Total:-
+
+<?php $cart = Mage::helper('checkout/cart')->getSummaryCount(); ?>	
+
+*) Show subcategory :-
+
+	http://stackoverflow.com/questions/1820012/magento-display-sub-category-list
+
+	http://stackoverflow.com/questions/604743/how-to-get-a-category-listing-from-magento
+
+*) breadcrumb for the contacts page.
+
+	http://www.magentocommerce.com/boards/viewthread/21047/
+
+*) Get Current Category Name:
+
+	Mage::registry('current_category')->getName();
+
+*) How to show Related products on product details page in Magento:
+	
+	http://www.n2ndevelopers.com/magento/how-to-show-related-products-on-product-details-page-in-magento/
+	
+	Open catalog.xml And Paste it under  Product view Section under 
+	<reference name=”content”>
+	
+	<block type=”catalog/product_list_related” name=”catalog.product.related” before=”-” template=”catalog/product/list/related.phtml”/>
+
+	<?php echo $this->getChildHtml('related'); ?>
+
+
+*)  Image Gallery in Product page
+
+	<?php $_images = new Mage_Catalog_Block_Product_View_Media; ?>
+            <?php if (count($_images->getGalleryImages()) > 0): ?>
+            <div class="more-views">
+                <h2><?php echo $_images->__('More Views') ?></h2>
+                <ul>
+                <?php foreach ($_images->getGalleryImages() as $_image): ?>
+                    <li>
+                        <a href="#" onclick="popWin('<?php echo $_images->getGalleryUrl($_image) ?>', 'gallery', 'width=300,height=300,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes'); return false;" title="<?php echo $_images->htmlEscape($_image->getLabel()) ?>"><img src="<?php echo $_images->helper('catalog/image')->init($_images->getProduct(), 'thumbnail', $_image->getFile())->resize(56); ?>" width="56" height="56" alt="<?php echo $_images->htmlEscape($_image->getLabel()) ?>" /></a>
+                    </li>
+                <?php endforeach; ?>
+                </ul>
+            </div>
+            <?php endif; ?> 
+ 
+*) add static block by layout:-
+
+	<block type="cms/block" name="left.cms.site_info">
+		<action method="setBlockId"><block_id>site_info</block_id></action>
+	</block>
+
+	http://www.anunaydahal.com/magento/create-static-block-magento/
+
+
+*) Get the Total Price of items currently in the Cart
+
+	<?php echo $this->helper('checkout')->formatPrice(Mage::getSingleton('checkout/cart')->getQuote()->getGrandTotal()); ?>
+
+	http://shamimcse05.wordpress.com/2010/12/23/how-to-get-total-cart-item-and-total-price-in-magento/
+
+
+*) Add review In Product Detail Page.
+
+	http://www.magentocommerce.com/boards/viewthread/8583/
+
+*) Add currency Selecter
+	http://inchoo.net/ecommerce/magento/how-to-add-currency-selector-to-magentos-header/
+
+
+*) Base Url:-
+
+	<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_LINK); ?>
+
+*) Get Skin Url :-
+
+	<?php echo $this->getSkinUrl(); ?>
+
+
+*) Fillter Records from the Collection:-
+
+	Mage::getModel('designs/designs')->getCollection()->addFilter('field_name','value'); 
+
+
+*) GET All Products :-
+
+	$_productCollection=Mage::getResourceModel('catalog/product_collection')->addAttributeToSelect('*')->setPageSize(6);
+	$_productCollection->load();
+	
+	setPageSize(6) for suing product limit
+	
+*) Get ADMIN's USER SESSION :-
+
+	$userInfo=Mage::getSingleton('admin/session')->getUser()->getData(); 	
+	
+*) Get  USER's SESSION :-	
+
+	Mage::getSingleton('customer/session')->isLoggedIn();
+	
+	print_r(Mage::helper('customer')->getCustomer()->getData());
+	
+	$customer = Mage::getSingleton('customer/session')->getCustomer();
+	echo $customer->getName();
+	echo $customer->getEmail();
+
+	
+	
+*) For product model 
+
+$_productCollection=Mage::getResourceModel('catalog/product_collection')->addAttributeToSelect('*')->addAttributeToFilter('status',1)->setOrder('entity_id', 'DESC');  
+$_productCollection->getSelect()->limit(5,5);
+
+
+*) Fillter Product by Category :
+
+http://blog.chapagain.com.np/magento-how-to-filter-product-collection-using-2-or-more-category-filters/
+
+
+http://www.magentocommerce.com/boards/viewthread/21794/#t269835
+
+*) Check CMS Page:-
+
+		Mage::getSingleton('cms/page')->getIdentifier()='home'	
+
+
+
+*) Get current_category
+
+	Mage::registry('current_category')->getName();
+	Mage::registry('current_category')->getUrl();
+
+
+*) get products by category id
+
+
+//Product listing By category Id
+
+	$category = Mage::getModel('catalog/category')->load($categoryId);
+
+	$_productCollection2 = Mage::getModel('catalog/product')->getCollection()
+	->addAttributeToSort('entity_id', 'DESC')
+	->addCategoryFilter($category)
+	->addAttributeToSelect('*');
+
+	//Pagination Code    
+		
+	$limit=5;
+	if($_GET['p']!=""){
+			//$st=($_GET['p'] - 1) * $limit;
+			$st=$_GET['p'];
+	}else{
+		$st=1;
+	}    
+
+
+	$_productCollection = Mage::getModel('catalog/product')->getCollection()
+	->addPriceData()       
+	->addAttributeToSort('entity_id', 'DESC')
+	->addCategoryFilter($category)
+	->addAttributeToSelect('*')
+	->setPage($st, $limit);
+
+	$_helper = $this->helper('catalog/output');
+
+
+	if(count($_productCollection2)){
+		$page=ceil(count($_productCollection2)/$limit);
+		
+	}
+
+	
+*) Get Session
+
+http://www.exploremagento.com/magento/run-magento-code-outside-of-magento.php
+
+*) Reset order table
+
+http://www.magentocommerce.com/boards/viewthread/1680/P405/
+
+
+*) Validation Check Form 
+<script type="text/javascript">
+    //<![CDATA[
+        var productSendtofriendForm = new VarienForm('product_sendtofriend_form');
+        productSendtofriendForm.submit = function() {
+            if(this.validator.validate()) {
+                this.form.submit();
+            }
+        }.bind(productSendtofriendForm);
+    //]]>
+    </script>
+	
+	
+	
+*) Set Variable In Template file in Magento : Mage::register('kitchen', $kitchen);
+
+	
+* ) Set Currency (USE Code in .pthml files)
+
+Mage::app()->getStore()->setCurrentCurrencyCode('USD');
+
+
+8) Add new field in Customer Module:-
+
+$setup = new Mage_Eav_Model_Entity_Setup('core_setup'); 
+     $attr2 = array (
+        'position' => 1,
+                'is_required'=>0 /* 0 if you want it to be a required field, 1 if not. Also, if required, add this class to the occupation input box on register.phtml class="required-entry input-text" */
+     );
+    $setup->addAttribute('1', 'outsiderole', $attr2);
+	
+	http://www.magentocommerce.com/boards/viewthread/9620/
+	
+*) Get Admin Users:-
+
+$user = Mage::getSingleton('admin/user')->getCollection()->getData(); 	
+
+
+
+
+*) Add Tab in Role informatio:
+
+	1) app\code\core\Mage\Adminhtml\Block\Permissions\Editroles.php
+
+
+*) Generating Backend-Admin URL with Key and Parameters in Magento
+
+
+echo Mage::helper("adminhtml")->getUrl("mymodule/adminhtml_mycontroller/myaction/",array("param1"=>1,"param2"=>2));
+Mage::getSingleton('adminhtml/url')->getSecretKey("adminhtml_mycontroller","myaction");
+
+http://subesh.com.np/2010/03/generating-backend-admin-url-key-parameters-magento/
+
+http://sanjeevkumarjha.com.np/how-to-get-base-url-of-admin-panel-in-magento/
+
+*) get Frontend Session 
+
+require_once 'app/Mage.php';
+umask(0);
+Mage::app('default');
+Mage::getSingleton('core/session', array('name' => 'frontend'));
+///print_r(Mage::getSingleton('customer/session')->getCustomer()->getData());
+$myData = Mage::getSingleton('core/session')->getMysession();
+
+print_r($myData);
+
+
+
+*) Get Custome Attribute in magento
+
+
+->addAttributeToSelect('classification');
+
+http://www.magentocommerce.com/boards/viewthread/20877/
+
+
+*) Magento Clear Shopping Cart and Session
+
+
+  1) Clear shopping cart:-
+
+	foreach( Mage::getSingleton('checkout/session')->getQuote()->getItemsCollection() as $item ){
+   		 Mage::getSingleton('checkout/cart')->removeItem( $item->getId() )->save();
+	}
+
+   2) 	Clear entire session:-
+	
+	Mage::getSingleton(‘checkout/session’)->clear();
+
+
+http://www.nvncbl.com/2009/09/magento-clear-shopping-cart-and-session/
+
+
+* ) Get Last insert ID:-
+	
+	http://www.magentocommerce.com/boards/viewthread/51096/
+
+	$lastInsertId = $connection->lastInsertId();
+	echo $lastInsertId; 
+
+
+*) Genrated the PDF in Magento
+
+
+		$pdf = new Zend_Pdf();
+
+
+		$pdf->pages[] = $pdf->newPage(Zend_Pdf_Page::SIZE_A4);
+
+		$page=$pdf->pages[0]; // this will get reference to the first page.
+
+		$style = new Zend_Pdf_Style();
+		$style->setLineColor(new Zend_Pdf_Color_Rgb(0,0,0));
+
+		$font = Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_TIMES);
+
+		$style->setFont($font,12);
+
+		$page->setStyle($style);
+
+		$page->drawText('example text here',100,($page->getHeight()-100));
+		$pdf->render();
+
+		$pdf->save('cc.pdf');
+
+
+http://stackoverflow.com/questions/8601232/error-in-generated-pdf-file-using-zend-pdf-under-magento
+
+
+*) Send Mail with attachment
+
+
+
+		$mail = new Zend_Mail();
+		$mail->setFrom("softweaver.tech@gmail.com","Softweaver");
+		$mail->addTo("r.singh.negi85@gmail.com","Ravinder Singh");
+		$mail->setSubject("Test Pdf");
+		$mail->setBodyHtml(" This is testing pdf"); // here u also use setBodyText options.
+		
+		$filename ='testasas.pdf';	 
+		// this is for to set the file format
+		$at = new Zend_Mime_Part($pdf->render());
+		 
+		$at->type = 'application/pdf'; // if u have PDF then it would like -> 'application/pdf'
+		$at->disposition = Zend_Mime::DISPOSITION_INLINE;
+		$at->encoding = Zend_Mime::ENCODING_8BIT;
+		$at->filename = $filename;
+		$mail->addAttachment($at);
+		$mail->send();
+
+8) get product by ID:-
+
+<?php
+$model = Mage::getModel('catalog/product') //getting product model
+ 
+$_product = $model->load($productid); //getting product object for particular product id
+ 
+echo $_product->getShortDescription(); //product's short description
+echo $_product->getDescription(); // product's long description
+echo $_product->getName(); //product name
+echo $_product->getPrice(); //product's regular Price
+echo $_product->getSpecialPrice(); //product's special Price
+echo $_product->getProductUrl(); //product url
+echo $_product->getImageUrl(); //product's image url
+echo $_product->getSmallImageUrl(); //product's small image url
+echo $_product->getThumbnailUrl(); //product's thumbnail image url   
+ 
+?>
+
+
+8) Magento - How to add/remove links on my account navigation?
+
+
+<customer_account>
+    <!-- Mage_Review -->
+    <reference name="customer_account_navigation">
+        <action method="addLink" translate="label" module="review"><name>myquote</name><path>review/customer</path><label>My Quote</label></action>
+    </reference>
+</customer_account>
+
+
+http://stackoverflow.com/questions/1977824/magento-how-to-add-remove-links-on-my-account-navigation
+
+
+
+
+
+* ) Programatically add bundle product to cart in Magento
+
+
+
+
+http://inchoo.net/ecommerce/magento/programatically-add-bundle-product-to-cart-n-magento/
+
+
+*) Get Cart Items
+
+
+$session= Mage::getSingleton('checkout/session');
+foreach($session->getQuote()->getAllItems() as $item)
+{
+  echo  $productid = $item->getProductId();
+  echo "<br>";
+   $productsku = $item->getSku();
+   echo $productname = $item->getName();
+   $productqty = $item->getQty();
+}
+
+
+
+*) Get Email Template:-
+
+$mailTemplate = Mage::getModel('core/email_template');
+                   
+                    $template_collection =  $mailTemplate->load(1);
+                    $template_data = $template_collection->getData();
+					
+					print_r( $template_data );
+
+
+
+
+/************************* Magento Store: How to Display the attribute values of product in Catalog search result page?*********************/\
+
+<!-- Start custom attributes declaration -->
+<reference name="search_result_list">
+<action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
+<action method="addAttribute"><attribute>name_of_the_attribute</attribute></action>
+</reference>
+<!-- End custom attributes declaration -->
+
+
+
+
+
+/*************************Resize images *********************/
+
+$imageUrl = Mage::getBaseDir('media').DS."catalog/product".$image['file'];
+						$imageResized = Mage::getBaseDir('media').DS."resized/product".$image['file'];
+						
+						$imageObj = new Varien_Image($imageUrl);
+						$imageObj->constrainOnly(TRUE);
+						$imageObj->keepAspectRatio(TRUE);
+						$imageObj->keepFrame(FALSE);
+						$imageObj->resize(null,32);
+						$imageObj->save($imageResized);
+
+
+
+
+
+/************************ Call Core template ***********************************
+
+ $className = Mage::getConfig() 
+                            ->getBlockClassName('core/template');
+             $block = new $className();
+             $block->setTemplate('page/template/right_card.phtml');
+             echo $block->renderView();
+
+
+
+/*************** Reindex **************/
+
+http://www.yireo.com/tutorials/magento/magento-administration/663-magento-14-cronjobs

@@ -1,0 +1,7 @@
+
+
+Call Static Block on File:-
+
+<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('elisou')->toHtml() ?> 
+
+
