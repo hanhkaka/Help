@@ -1,0 +1,5 @@
+
+
+Step 1 : Download and install Node.js and run command :- sudo npm install -g cordova
+
+Step 2: cordova create hello com.example.hello HelloWorld 

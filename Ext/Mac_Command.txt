@@ -1,0 +1,32 @@
+
+
+Start Apache:
+sudo launchctl unload -w /System/Library/LaunchDaemons/org.apache.httpd.plist
+
+Show Process:
+ps -ax
+
+-----------------------------||-----------------------------------
+
+Revealing Hidden Files With Terminal:
+
+defaults write com.apple.Finder AppleShowAllFiles TRUE
+killall Finder 
+
+defaults write com.apple.Finder AppleShowAllFiles FALSE
+killall Finder 
+
+-----------------------------||------------------------------------
+
+For SVN Install
+sudo port install subversion
+
+
+Set Path EVN Variable:
+
+export PATH=${PATH}:/Users/data/Downloads/Software/android/sdk/tools/
+
+
+How To Clear DNS Cache In Mac OSX Leopard:-
+
+dscacheutil -flushcache  

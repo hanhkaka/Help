@@ -1,0 +1,15 @@
+1. Open a command prompt but do so with administrative privileges. See this link on how to do this.
+
+2. If you are running Windows Vista 32-bit, then ensure the command prompt is currently in the directory “C:\Windows\System32\” which should be the default starting location when you open the command prompt. If you are running Vista 64-bit, then run the following command to get to the correct directory:
+
+cd ..\SysWow64
+
+3. Type the following command in the command prompt window and then press ENTER:
+
+regsvr32 jscript.dll
+
+    If the problem persists, then additionally run the command :
+
+regsvr32 vbscript.dll
+
+4. Try running the CS3 installer again. It should now work.
