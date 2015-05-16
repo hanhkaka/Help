@@ -65,6 +65,19 @@
 		b) Command For android app:
 
 			--> emulator -avd avd_name 		
+			
+			
+			
+********************** Set Android-SDK Path for Mac **********************
+
+
+export ANDROID_HOME=/Applications/ADT/sdk 
+Once you have this set, you need to add this to the PATH environment variable
+
+export PATH=$PATH:$ANDROID_HOME/bin		
+
+
+export ANT_HOME=/Users/ravi/Downloads/Software/apache-ant-1.9.4
 		
 		
 	
