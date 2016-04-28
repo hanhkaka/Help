@@ -1,0 +1,48 @@
+Artisan commands.
+
+Create Controller : -
+
+	php artisan make:controller PhotoController
+
+Build RESTful controllers : -
+
+	php artisan make:controller PhotoController --resource
+
+Create Model  : -
+
+	php artisan make:model User
+
+Create Middleware  : -
+	
+	php artisan make:middleware OldMiddleware
+	
+
+	
+Database Migrations and Seeding   : -	
+
+	php artisan migrate (new operation  in the database )
+	php artisan make:migration create_users_table (for using create table )
+	php artisan make:migration add_votes_to_users_table --create=users (for using create table )
+	php artisan make:migration add_votes_to_users_table --table=users (for using edit/add column in the table )
+
+	php artisan migrate --force (new operation  in the database. To force the commands to run without a prompt, use the --force flag: )
+	php artisan migrate:rollback (To rollback the latest migration "operation" in the database )
+	php artisan migrate:reset (he migrate:reset command will roll back all of your application's migrations:)
+	
+	
+	php artisan make:seeder UsersTableSeeder (Create new Seeder Class by this command)
+	php artisan db:seed (for using excute seeding)
+	php artisan db:seed --class=UserTableSeeder (for using only one seeding class)
+	php artisan migrate:refresh --seed ( rest change for using only one seeding class)
+
+
+
+ add vairable in vie file:
+ 
+ {{--*/ $i = 0 /*--}}
+
+
+	
+
+
+
