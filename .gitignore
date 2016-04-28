@@ -1,0 +1,12 @@
+*.DS_Store
+/Javascript/*.DS_Store
+/Mac/*.DS_Store
+/Html Css/*.DS_Store
+/Javascript/Prototype/*.DS_Store
+/Jquery/.DS_Store
+/Php/*.DS_Store
+/Php/Wordpress/*.DS_Store
+/Php/Magento/*.DS_Store
+/Php/Joomla/*.DS_Store
+/Php/Cake php/*.DS_Store
+/Php/Corephp/*.DS_Store
