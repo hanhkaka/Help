@@ -1,0 +1,15 @@
+
+
+cordova plugin rm org.apache.cordova.console
+
+
+cordova build --release android
+
+
+keytool -genkey -v -keystore my-release-key.keystore -alias alias_name -keyalg RSA -keysize 2048 -validity 10000
+
+
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore android-release-unsigned.apk alias_name
+
+
+zipalign -v 4 D:\git_branch\Ionic Apps\restoApp\android-release-unsigned.apk D:\git_branch\Ionic Apps\restoApp\FindResto.apk

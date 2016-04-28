@@ -1,0 +1,28 @@
+Cron Job:
+
+
+Step 1: Open Termianl and write command crontab -e
+
+Step 2: Add schedule for job:
+
+
+Exapmle for run script every 10mins :
+
+MAILTO=gajinder.negi@live.in
+*/1 * * * * /var/www/html/calculator/send_message_pending_test.php
+
+*/1 * * * * /usr/bin/wget https://toptierediting.com/calculator/send_message_pending_test.php
+
+Then Press Ctrl + X then Press S + Enter
+
+Parameter : minute hour day month day-of-week command-line-to-execute
+
+Refer  Links : 
+
+http://www.thesitewizard.com/general/set-cron-job.shtml
+http://www.cyberciti.biz/faq/how-do-i-add-jobs-to-cron-under-linux-or-unix-oses/
+
+http://www.thegeekstuff.com/2009/06/15-practical-crontab-examples/
+
+crontab -l for showing list of schedule. 
+ 

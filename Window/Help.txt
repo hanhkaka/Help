@@ -1,0 +1,8 @@
+
+Remove Services In Window:
+
+SC STOP shortservicename
+
+SC DELETE shortservicename
+
+sc.exe create Apache binPath = D:\installed\xampp\apache\bin
